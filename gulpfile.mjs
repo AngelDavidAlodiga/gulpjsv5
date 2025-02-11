@@ -8,11 +8,11 @@ import svgo from 'imagemin-svgo';
 gulp.task('images', () => {
   return gulp.src('src/images/**/*.{jpg,jpeg,png,gif,svg}')
     .pipe(imagemin([
-      mozjpeg({ quality: 80, progressive: true }), // Optimización JPEG
-      optipng({ optimizationLevel: 5 }), // Optimización PNG
-      svgo() // Optimización SVG
+      mozjpeg({ quality: 70, progressive: true }), // Mejor compresión de JPEG
+      optipng({ optimizationLevel: 7 }), // Máxima optimización PNG
+      svgo({ plugins: [{ name: 'removeViewBox', active: false }] }) // Solo desactivar removeViewBox
     ], {
-      verbose: true // Muestra más detalles sobre el proceso de optimización
+      verbose: true // Detalles sobre el proceso de optimización
     }))
     .pipe(gulp.dest('dist/images')); // Guardar las imágenes optimizadas
 });
